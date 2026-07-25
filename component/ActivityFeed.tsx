@@ -1,6 +1,6 @@
 'use client'
 
-import { HistoryEntry } from '@/types'
+import { HistoryEntry } from '../types'
 import { CheckCircle2, XCircle, PauseCircle } from 'lucide-react'
 
 const STATUS_ICONS: Record<string, React.ReactNode> = {
