@@ -1,6 +1,6 @@
 'use client'
 
-import { AgentStatus, AgentConfig } from '@/types'
+import { AgentStatus, AgentConfig } from '../types'
 import { 
   CheckCircle2, 
   XCircle, 
