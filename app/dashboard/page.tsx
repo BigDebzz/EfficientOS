@@ -1,46 +1,46 @@
-'use client';
+'use client'
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useDashboardStore } from '@/stores/dashboard';
-import AgentCard from '@/components/AgentCard';
-import DesktopStatusBar from '@/components/DesktopStatusBar';
-import ActivityFeed from '@/components/ActivityFeed';
-import { Settings, LogOut, Zap } from 'lucide-react';
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useDashboardStore } from '../../stores/dashboard'
+import AgentCard from '../../components/AgentCard'
+import DesktopStatusBar from '../../components/DesktopStatusBar'
+import ActivityFeed from '../../components/ActivityFeed'
+import { Settings, LogOut, Zap } from 'lucide-react'
 
 export default function Dashboard() {
-  const router = useRouter();
-  const { token, status, isLoading, fetchStatus, clearToken, sendCommand } = useDashboardStore();
+  const router = useRouter()
+  const { token, status, isLoading, fetchStatus, clearToken, sendCommand } = useDashboardStore()
 
   useEffect(() => {
     if (!token) {
-      router.push('/');
-      return;
+      router.push('/')
+      return
     }
 
-    fetchStatus();
-    const interval = setInterval(fetchStatus, 30000);
-    return () => clearInterval(interval);
-  }, [token, router, fetchStatus]);
+    fetchStatus()
+    const interval = setInterval(fetchStatus, 30000)
+    return () => clearInterval(interval)
+  }, [token, router, fetchStatus])
 
   const handleRunNow = (agentId: string) => {
     sendCommand({
       type: 'run_agent',
       agent: agentId,
-    });
-  };
+    })
+  }
 
   const handleToggle = (agentId: string) => {
-    const agent = status?.agents[agentId];
-    if (!agent) return;
-
+    const agent = status?.agents[agentId]
+    if (!agent) return
+    
     sendCommand({
       type: agent.status === 'paused' ? 'resume_agent' : 'pause_agent',
       agent: agentId,
-    });
-  };
+    })
+  }
 
-  if (!token) return null;
+  if (!token) return null
 
   return (
     <div className="min-h-screen bg-[#0f0f1a]">
@@ -106,5 +106,5 @@ export default function Dashboard() {
         )}
       </main>
     </div>
-  );
+  )
 }
