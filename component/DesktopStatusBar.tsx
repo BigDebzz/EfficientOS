@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import { useDashboardStore } from '@/stores/dashboard';
-import { Wifi, WifiOff, AlertTriangle } from 'lucide-react';
+import { useDashboardStore } from '@/stores/dashboard'
+import { Wifi, WifiOff, AlertTriangle } from 'lucide-react'
 
 export default function DesktopStatusBar() {
-  const { desktopOnline, lastSync } = useDashboardStore();
+  const { desktopOnline, lastSync } = useDashboardStore()
 
   if (desktopOnline) {
     return (
@@ -17,7 +17,7 @@ export default function DesktopStatusBar() {
           </span>
         )}
       </div>
-    );
+    )
   }
 
   if (lastSync && Date.now() - lastSync.getTime() < 3600000) {
@@ -29,7 +29,7 @@ export default function DesktopStatusBar() {
         </span>
         <span className="text-sm text-[#8b8ba7]">Your computer may be asleep</span>
       </div>
-    );
+    )
   }
 
   return (
@@ -38,5 +38,5 @@ export default function DesktopStatusBar() {
       <span className="text-sm text-[#e74c3c] font-medium">Desktop app offline</span>
       <span className="text-sm text-[#8b8ba7]">Check that EfficientOS is running</span>
     </div>
-  );
+  )
 }
