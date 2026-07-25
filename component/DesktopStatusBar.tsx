@@ -1,6 +1,6 @@
 'use client'
 
-import { useDashboardStore } from '@/stores/dashboard'
+import { useDashboardStore } from '../stores/dashboard'
 import { Wifi, WifiOff, AlertTriangle } from 'lucide-react'
 
 export default function DesktopStatusBar() {
