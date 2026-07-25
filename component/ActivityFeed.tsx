@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { HistoryEntry } from '@/types';
-import { CheckCircle2, XCircle, PauseCircle } from 'lucide-react';
+import { HistoryEntry } from '@/types'
+import { CheckCircle2, XCircle, PauseCircle } from 'lucide-react'
 
 const STATUS_ICONS: Record<string, React.ReactNode> = {
   success: <CheckCircle2 className="w-4 h-4 text-[#2ecc71]" />,
   failed: <XCircle className="w-4 h-4 text-[#e74c3c]" />,
   paused: <PauseCircle className="w-4 h-4 text-[#8b8ba7]" />,
-};
+}
 
 const AGENT_NAMES: Record<string, string> = {
   morning_briefing: 'Morning Briefing',
@@ -15,11 +15,11 @@ const AGENT_NAMES: Record<string, string> = {
   weekly_review: 'Weekly Review',
   networking_prep: 'Networking Prep',
   resume_agent: 'Resume Agent',
-};
+}
 
 interface ActivityFeedProps {
-  history: HistoryEntry[];
-  timezone: string;
+  history: HistoryEntry[]
+  timezone: string
 }
 
 export default function ActivityFeed({ history, timezone }: ActivityFeedProps) {
@@ -29,7 +29,7 @@ export default function ActivityFeed({ history, timezone }: ActivityFeedProps) {
         <h3 className="font-semibold text-[#e8e8f0] mb-4">Recent Activity</h3>
         <p className="text-sm text-[#8b8ba7]">No activity yet. Your agents will appear here once they run.</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -60,5 +60,5 @@ export default function ActivityFeed({ history, timezone }: ActivityFeedProps) {
         ))}
       </div>
     </div>
-  );
+  )
 }
