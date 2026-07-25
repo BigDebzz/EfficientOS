@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import { AgentStatus, AgentConfig } from '@/types';
+import { AgentStatus, AgentConfig } from '@/types'
 import { 
   CheckCircle2, 
   XCircle, 
@@ -13,7 +13,7 @@ import {
   FileText,
   Users,
   Mail
-} from 'lucide-react';
+} from 'lucide-react'
 
 const AGENT_CONFIGS: Record<string, AgentConfig> = {
   morning_briefing: {
@@ -51,7 +51,7 @@ const AGENT_CONFIGS: Record<string, AgentConfig> = {
     icon: 'mail',
     defaultSchedule: null,
   },
-};
+}
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   calendar: <Calendar className="w-5 h-5" />,
@@ -59,7 +59,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   filetext: <FileText className="w-5 h-5" />,
   users: <Users className="w-5 h-5" />,
   mail: <Mail className="w-5 h-5" />,
-};
+}
 
 const STATUS_CONFIG = {
   success: { icon: <CheckCircle2 className="w-5 h-5" />, color: 'text-[#2ecc71]', border: 'border-[#2ecc71]/30', bg: 'bg-[#2ecc71]/5', dot: 'bg-[#2ecc71]' },
@@ -68,22 +68,22 @@ const STATUS_CONFIG = {
   running: { icon: <Loader2 className="w-5 h-5 animate-spin" />, color: 'text-[#e94560]', border: 'border-[#e94560]/30', bg: 'bg-[#e94560]/5', dot: 'bg-[#e94560]' },
   idle: { icon: <Clock className="w-5 h-5" />, color: 'text-[#8b8ba7]', border: 'border-[#2d2d4a]', bg: 'bg-transparent', dot: 'bg-[#8b8ba7]' },
   scheduled: { icon: <Clock className="w-5 h-5" />, color: 'text-[#3498db]', border: 'border-[#3498db]/30', bg: 'bg-[#3498db]/5', dot: 'bg-[#3498db]' },
-};
+}
 
 interface AgentCardProps {
-  agentId: string;
-  agentStatus: AgentStatus;
-  timezone: string;
-  onRunNow: () => void;
-  onToggle: () => void;
+  agentId: string
+  agentStatus: AgentStatus
+  timezone: string
+  onRunNow: () => void
+  onToggle: () => void
 }
 
 export default function AgentCard({ agentId, agentStatus, timezone, onRunNow, onToggle }: AgentCardProps) {
-  const config = AGENT_CONFIGS[agentId];
-  if (!config) return null;
+  const config = AGENT_CONFIGS[agentId]
+  if (!config) return null
 
-  const status = STATUS_CONFIG[agentStatus.status] || STATUS_CONFIG.idle;
-  const isOnDemand = !config.defaultSchedule;
+  const status = STATUS_CONFIG[agentStatus.status] || STATUS_CONFIG.idle
+  const isOnDemand = !config.defaultSchedule
 
   return (
     <div className={`relative rounded-2xl border ${status.border} ${status.bg} p-6 transition-all hover:border-opacity-60`}>
@@ -152,5 +152,5 @@ export default function AgentCard({ agentId, agentStatus, timezone, onRunNow, on
         )}
       </div>
     </div>
-  );
+  )
 }
