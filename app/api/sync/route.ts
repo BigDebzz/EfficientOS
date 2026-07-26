@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { setStatus } from '../../lib/kv'
+import { setStatus } from '../../../lib/kv'
 
 export async function POST(request: NextRequest) {
   try {
