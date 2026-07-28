@@ -1,56 +1,56 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useDashboardStore } from '@/stores/dashboard';
-import { Zap, ArrowRight, Download } from 'lucide-react';
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useDashboardStore } from '../stores/dashboard'
+import { Zap, ArrowRight, Download } from 'lucide-react'
 
 export default function TokenEntry() {
-  const [input, setInput] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const setToken = useDashboardStore((s) => s.setToken);
+  const [input, setInput] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const setToken = useDashboardStore((s) => s.setToken)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+    e.preventDefault()
+    setError('')
+    setLoading(true)
 
-    const token = input.startsWith('eos_') ? input : `eos_${input}`;
-
+    const token = input.startsWith('eos_') ? input : `eos_${input}`
+    
     if (!/^eos_[a-zA-Z0-9]{20,32}$/.test(token)) {
-      setError('Invalid token format. It should look like eos_abc123...');
-      setLoading(false);
-      return;
+      setError('Invalid token format. It should look like eos_abc123...')
+      setLoading(false)
+      return
     }
 
     try {
-      const res = await fetch(`/api/status?token=${token}`);
-      const data = await res.json();
-
+      const res = await fetch(`/api/status?token=${token}`)
+      const data = await res.json()
+      
       if (data.error) {
-        setError('Token not found. Make sure your desktop app is running.');
-        setLoading(false);
-        return;
+        setError('Token not found. Make sure your desktop app is running.')
+        setLoading(false)
+        return
       }
 
-      setToken(token);
-      router.push('/dashboard');
+      setToken(token)
+      router.push('/dashboard')
     } catch {
-      setError('Connection failed. Please try again.');
-      setLoading(false);
+      setError('Connection failed. Please try again.')
+      setLoading(false)
     }
-  };
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-[#0f0f1a]">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#e94560]/10 mb-6">
             <Zap className="w-8 h-8 text-[#e94560]" />
           </div>
-          <h1 className="text-3xl font-bold mb-3">EfficientOS</h1>
+          <h1 className="text-3xl font-bold mb-3 text-[#e8e8f0]">EfficientOS</h1>
           <p className="text-[#8b8ba7]">Your AI operations team dashboard</p>
         </div>
 
@@ -89,7 +89,7 @@ export default function TokenEntry() {
         </form>
 
         <div className="mt-8 text-center">
-          <p className="text-sm text-[#8b8ba7] mb-3">Don&apos;t have a token?</p>
+          <p className="text-sm text-[#8b8ba7] mb-3">Don't have a token?</p>
           <a
             href="https://efficientos.dev"
             target="_blank"
@@ -102,5 +102,5 @@ export default function TokenEntry() {
         </div>
       </div>
     </div>
-  );
+  )
 }
