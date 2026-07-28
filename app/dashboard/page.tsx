@@ -2,10 +2,10 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useDashboardStore } from '../../stores/dashboard'
-import AgentCard from '../../components/AgentCard'
-import DesktopStatusBar from '../../components/DesktopStatusBar'
-import ActivityFeed from '../../components/ActivityFeed'
+import { useDashboardStore } from '../../../stores/dashboard'
+import AgentCard from '../../../components/AgentCard'
+import DesktopStatusBar from '../../../components/DesktopStatusBar'
+import ActivityFeed from '../../../components/ActivityFeed'
 import { Settings, LogOut, Zap } from 'lucide-react'
 
 export default function Dashboard() {
@@ -87,24 +87,4 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {Object.entries(status.agents).map(([agentId, agentStatus]) => (
                 <AgentCard
-                  key={agentId}
-                  agentId={agentId}
-                  agentStatus={agentStatus}
-                  timezone={status.settings.timezone}
-                  onRunNow={() => handleRunNow(agentId)}
-                  onToggle={() => handleToggle(agentId)}
-                />
-              ))}
-            </div>
-
-            {/* Activity Feed */}
-            <ActivityFeed 
-              history={status.history} 
-              timezone={status.settings.timezone} 
-            />
-          </>
-        )}
-      </main>
-    </div>
-  )
-}
+                  key={agentId
