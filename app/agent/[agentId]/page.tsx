@@ -1,31 +1,32 @@
-'use client';
+'use client'
 
-import { useParams, useRouter } from 'next/navigation';
-import { useDashboardStore } from '@/stores/dashboard';
-import { ArrowLeft, Play, Pause } from 'lucide-react';
+import { useParams, useRouter } from 'next/navigation'
+import { useDashboardStore } from '../../../stores/dashboard'
+import { ArrowLeft, Play, Pause } from 'lucide-react'
 
 export default function AgentDetail() {
-  const params = useParams();
-  const router = useRouter();
-  const { status, sendCommand } = useDashboardStore();
-  const agentId = params.agentId as string;
-
-  const agent = status?.agents[agentId];
-  if (!agent || !status) {
-    return (
-      <div className="min-h-screen bg-[#0f0f1a] flex items-center justify-center">
-        <p className="text-[#8b8ba7]">Agent not found</p>
-      </div>
-    );
-  }
-
+  const params = useParams()
+  const router = useRouter()
+  const { status, sendCommand } = useDashboardStore()
+  const agentId = params.agentId as string
+  
+  const agent = status?.agents?.[agentId]
+  
   const names: Record<string, string> = {
     morning_briefing: 'Morning Briefing',
     jobs_digest: 'Jobs Digest',
     weekly_review: 'Weekly Review',
     networking_prep: 'Networking Prep',
     resume_agent: 'Resume Agent',
-  };
+  }
+
+  if (!agent || !status) {
+    return (
+      <div className="min-h-screen bg-[#0f0f1a] flex items-center justify-center">
+        <p className="text-[#8b8ba7]">Agent not found</p>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-[#0f0f1a]">
@@ -35,7 +36,7 @@ export default function AgentDetail() {
             <ArrowLeft className="w-5 h-5 text-[#8b8ba7]" />
           </button>
           <div>
-            <h1 className="text-xl font-bold">{names[agentId] || agentId}</h1>
+            <h1 className="text-xl font-bold text-[#e8e8f0]">{names[agentId] || agentId}</h1>
             <p className="text-xs text-[#8b8ba7]">
               {agent.schedule ? `Runs: ${agent.schedule}` : 'On demand'}
             </p>
@@ -44,7 +45,6 @@ export default function AgentDetail() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-6">
-        {/* Status Card */}
         <div className="rounded-2xl border border-[#2d2d4a] bg-[#1a1a2e] p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className={`w-3 h-3 rounded-full ${
@@ -53,9 +53,9 @@ export default function AgentDetail() {
               agent.status === 'running' ? 'bg-[#e94560] animate-pulse' :
               'bg-[#8b8ba7]'
             }`} />
-            <span className="font-medium capitalize">{agent.status}</span>
+            <span className="font-medium text-[#e8e8f0] capitalize">{agent.status}</span>
           </div>
-
+          
           {agent.last_run && (
             <p className="text-sm text-[#8b8ba7] mb-2">
               Last run: {new Date(agent.last_run).toLocaleString('en-US', { timeZone: status.settings.timezone })}
@@ -71,7 +71,6 @@ export default function AgentDetail() {
           )}
         </div>
 
-        {/* Actions */}
         <div className="flex gap-3">
           <button
             onClick={() => sendCommand({ type: 'run_agent', agent: agentId })}
@@ -92,7 +91,6 @@ export default function AgentDetail() {
           </button>
         </div>
 
-        {/* Output */}
         {agent.output_summary && (
           <div className="rounded-2xl border border-[#2d2d4a] bg-[#1a1a2e] p-6">
             <h3 className="font-semibold text-[#e8e8f0] mb-3">Last Output</h3>
@@ -101,5 +99,5 @@ export default function AgentDetail() {
         )}
       </main>
     </div>
-  );
+  )
 }
