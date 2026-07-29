@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useDashboardStore } from '../stores/dashboard'
-import { Zap, ArrowRight, Download } from 'lucide-react'
+import { Zap, ArrowRight, Download, Eye } from 'lucide-react'
 
 export default function TokenEntry() {
   const [input, setInput] = useState('')
@@ -41,6 +41,11 @@ export default function TokenEntry() {
       setError('Connection failed. Please try again.')
       setLoading(false)
     }
+  }
+
+  const handleDemo = () => {
+    setToken('eos_demo')
+    router.push('/dashboard')
   }
 
   return (
@@ -89,6 +94,16 @@ export default function TokenEntry() {
               )}
             </button>
           </form>
+
+          <div className="mt-4 pt-4 border-t border-slate-100">
+            <button
+              onClick={handleDemo}
+              className="w-full py-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-2"
+            >
+              <Eye className="w-4 h-4" />
+              View Demo (no setup required)
+            </button>
+          </div>
         </div>
 
         <div className="mt-6 text-center">
